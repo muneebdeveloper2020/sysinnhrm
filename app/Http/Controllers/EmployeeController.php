@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Employee;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class EmployeeController extends Controller
 {
@@ -21,14 +22,19 @@ class EmployeeController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'email' => 'required|email|unique:employees',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' => 'required|email|unique:employees,email',
+            'password' => 'required|string|min:6',
+            // add any other fields you want to validate
         ]);
-
+    
+        $validated['password'] = Hash::make($validated['password']); // ✅ Hash the password before storing
+    
         Employee::create($validated);
-
-        return redirect()->route('employees.index')->with('success', 'Employee added!');
+    
+        return redirect()->route('employees.index')->with('success', 'Employee created successfully.');
+    
     }
 
     public function show(Employee $employee)

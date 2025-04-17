@@ -1,10 +1,19 @@
 @extends('layouts.app')
 
+<style>
+    a.bg-blue-600.hover\:bg-blue-700.text-white.font-medium.py-2.px-4.rounded {
+        background-color: blue;
+    }
+    button.bg-blue-600.hover\:bg-blue-700.text-white.font-medium.py-2.px-4.rounded {
+        background-color: blue!important;
+    }
+</style>
+
 @section('content')
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 class="text-2xl font-semibold text-gray-800 dark:text-white mb-6">Edit Employee</h2>
 
-        <form action="{{ route('employees.update', $employee) }}" method="POST" class="bg-white dark:bg-gray-800 shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <form action="{{ route('employees.update', $employee->id) }}" method="POST" class="bg-white dark:bg-gray-800 shadow-md rounded px-8 pt-6 pb-8 mb-4">
             @csrf
             @method('PUT')
 
@@ -34,6 +43,17 @@
                        required>
                 @error('email') <p class="text-red-500 text-sm mt-1">{{ $message }}</p> @enderror
             </div>
+
+            {{-- Optional: Include password field if you allow password update --}}
+            {{-- 
+            <div class="mb-4">
+                <label for="password" class="block text-gray-700 dark:text-gray-300 font-medium mb-2">Password</label>
+                <input type="password" id="password" name="password"
+                       class="w-full px-4 py-2 border rounded-lg dark:bg-gray-700 dark:text-white dark:border-gray-600 focus:outline-none focus:ring focus:border-blue-300">
+                <small class="text-gray-400 dark:text-gray-500">Leave blank to keep current password</small>
+                @error('password') <p class="text-red-500 text-sm mt-1">{{ $message }}</p> @enderror
+            </div>
+            --}}
 
             <div class="mb-4">
                 <label for="phone" class="block text-gray-700 dark:text-gray-300 font-medium mb-2">Phone</label>
@@ -68,15 +88,14 @@
             </div>
 
             {{-- Optional: Department dropdown --}}
-            {{--
+            {{-- 
             <div class="mb-4">
                 <label for="department_id" class="block text-gray-700 dark:text-gray-300 font-medium mb-2">Department</label>
                 <select id="department_id" name="department_id"
                         class="w-full px-4 py-2 border rounded-lg dark:bg-gray-700 dark:text-white dark:border-gray-600 focus:outline-none focus:ring focus:border-blue-300">
                     <option value="">Select department</option>
                     @foreach($departments as $dept)
-                        <option value="{{ $dept->id }}"
-                            {{ old('department_id', $employee->department_id) == $dept->id ? 'selected' : '' }}>
+                        <option value="{{ $dept->id }}" {{ old('department_id', $employee->department_id) == $dept->id ? 'selected' : '' }}>
                             {{ $dept->name }}
                         </option>
                     @endforeach

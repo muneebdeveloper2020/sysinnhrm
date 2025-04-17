@@ -1,6 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
+<style>
+    a.bg-blue-600.hover\:bg-blue-700.text-white.font-medium.py-2.px-4.rounded {
+    background-color: blue;
+}
+button.bg-blue-600.hover\:bg-blue-700.text-white.font-medium.py-2.px-4.rounded {
+    background-color: blue!important;
+}
+</style>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center mb-6">
             <h1 class="text-2xl font-semibold text-gray-800 dark:text-white">Employees</h1>

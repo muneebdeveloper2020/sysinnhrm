@@ -2,17 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
-class Employee extends Model
+class Employee extends Authenticatable
 {
-    use HasFactory;
+    use Notifiable;
 
     protected $fillable = [
         'first_name',
         'last_name',
         'email',
+        'password',
         'phone',
         'position',
         'department_id',
@@ -20,9 +21,14 @@ class Employee extends Model
         'hired_at',
     ];
 
+    protected $hidden = ['password'];
     public function department()
     {
         return $this->belongsTo(Department::class);
     }
-    
+
+    public function dailyTasks()
+    {
+        return $this->hasMany(EmployeeDailyTask::class);
+    }
 }
