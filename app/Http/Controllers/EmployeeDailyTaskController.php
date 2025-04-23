@@ -33,7 +33,6 @@ class EmployeeDailyTaskController extends Controller
         ]);
 
         EmployeeDailyTask::create($request->all());
-
         return redirect()->route('employee-daily-tasks.index')->with('success', 'Task created successfully.');
     }
 
