@@ -16,18 +16,21 @@
 </head>
 <body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-white min-h-screen flex flex-col">
 
-    <header class="w-full py-6 px-6 lg:px-12 flex justify-between items-center shadow-sm bg-white dark:bg-gray-800">
-        <h1 class="text-xl font-bold">Syssin <span class="text-blue-600">HRM</span></h1>
+<header class="w-full py-6 px-6 lg:px-12 flex justify-between items-center shadow-sm bg-white dark:bg-gray-800">
+    <h1 class="text-xl font-bold">Syssin <span class="text-blue-600">HRM</span></h1>
+    <nav class="space-x-4">
+        <a href="{{ route('employee.login') }}" class="px-4 py-2 rounded border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white text-sm">Employee login</a>
+
         @if (Route::has('login'))
-            <nav class="space-x-4">
-                @auth
-                    <a href="{{ url('/dashboard') }}" class="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700 text-sm">Dashboard</a>
-                @else
-                    <a href="{{ route('login') }}" class="px-4 py-2 rounded border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white text-sm">Log in</a>
-                @endauth
-            </nav>
+            @auth
+                <a href="{{ url('/dashboard') }}" class="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700 text-sm">Dashboard</a>
+            @else
+                <a href="{{ route('login') }}" class="px-4 py-2 rounded border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white text-sm">Log in</a>
+            @endauth
         @endif
-    </header>
+    </nav>
+</header>
+
 
     <main class="flex-grow flex flex-col items-center justify-center text-center px-6 py-12">
         <h2 class="text-4xl lg:text-5xl font-extrabold mb-4">Streamline Your HR Management</h2>
